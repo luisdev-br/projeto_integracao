@@ -1,9 +1,9 @@
 const Project = require("../models/Project");
 
-// Criar um projeto
+
 const createProject = async (req, res) => {
   const { name, description, startDate, endDate } = req.body;
-  const userId = req.userId; // Obtém o ID do usuário autenticado
+  const userId = req.userId; 
 
   try {
     const newProject = new Project({
@@ -16,7 +16,7 @@ const createProject = async (req, res) => {
 
     const savedProject = await newProject.save();
 
-    // Retorna o projeto com o userId incluso
+    
     res.status(201).json({
       message: "Projeto criado com sucesso!",
       project: {
@@ -25,7 +25,7 @@ const createProject = async (req, res) => {
         startDate: savedProject.startDate,
         endDate: savedProject.endDate,
         _id: savedProject._id,
-        userId: savedProject.userId, // Inclui o userId explicitamente
+        userId: savedProject.userId, 
         __v: savedProject.__v,
       },
     });
@@ -34,9 +34,9 @@ const createProject = async (req, res) => {
   }
 };
 
-// Listar todos os projetos
+
 const getAllProjects = async (req, res) => {
-  const userId = req.userId; // Obtém o ID do usuário autenticado
+  const userId = req.userId; 
 
   try {
     const projects = await Project.find({ userId });
@@ -46,7 +46,7 @@ const getAllProjects = async (req, res) => {
   }
 };
 
-// Atualizar um projeto
+
 const editProject = async (req, res) => {
   const { id } = req.params;
   const { name, description, startDate, endDate } = req.body;
@@ -55,7 +55,7 @@ const editProject = async (req, res) => {
     const updatedProject = await Project.findByIdAndUpdate(
       id,
       { name, description, startDate, endDate },
-      { new: true } // Retorna o projeto atualizado
+      { new: true } 
     );
 
     if (!updatedProject) {

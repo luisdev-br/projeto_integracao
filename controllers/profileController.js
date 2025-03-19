@@ -1,9 +1,9 @@
 const Profile = require("../models/Profile");
 
-// Criar um perfil
+
 const createProfile = async (req, res) => {
   const { occupation, phone, address } = req.body;
-  const userId = req.userId; // Obtém o ID do usuário autenticado
+  const userId = req.userId;
 
   try {
     const newProfile = new Profile({
@@ -23,9 +23,9 @@ const createProfile = async (req, res) => {
   }
 };
 
-// Listar todos os perfis
+
 const getAllProfiles = async (req, res) => {
-  const userId = req.userId; // Obtém o ID do usuário autenticado
+  const userId = req.userId; 
 
   try {
     const profiles = await Profile.find({ userId });
@@ -35,7 +35,7 @@ const getAllProfiles = async (req, res) => {
   }
 };
 
-// Atualizar um perfil
+
 const editProfile = async (req, res) => {
   const { id } = req.params;
   const { occupation, phone, address } = req.body;
@@ -44,7 +44,7 @@ const editProfile = async (req, res) => {
     const updatedProfile = await Profile.findByIdAndUpdate(
       id,
       { occupation, phone, address },
-      { new: true } // Retorna o perfil atualizado
+      { new: true } 
     );
 
     if (!updatedProfile) {
@@ -60,7 +60,7 @@ const editProfile = async (req, res) => {
   }
 };
 
-// Excluir um perfil
+
 const deleteProfile = async (req, res) => {
   const { id } = req.params;
 

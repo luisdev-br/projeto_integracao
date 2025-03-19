@@ -1,14 +1,13 @@
 const Task = require("../models/Task");
 
-// Criar uma tarefa
 const createTask = async (req, res) => {
   const { title, projectId } = req.body;
-  const userId = req.userId; // Obtém o ID do usuário autenticado
+  const userId = req.userId; 
 
   try {
     const newTask = new Task({
       title,
-      finished: false, // Tarefa começa como não concluída
+      finished: false, 
       projectId,
       userId,
     });
@@ -23,9 +22,9 @@ const createTask = async (req, res) => {
   }
 };
 
-// Listar todas as tarefas
+
 const getAllTasks = async (req, res) => {
-  const userId = req.userId; // Obtém o ID do usuário autenticado
+  const userId = req.userId; 
 
   try {
     const tasks = await Task.find({ userId }).populate("projectId");
@@ -35,7 +34,7 @@ const getAllTasks = async (req, res) => {
   }
 };
 
-// Atualizar uma tarefa
+
 const editTask = async (req, res) => {
   const { id } = req.params;
   const { title, finished } = req.body;
@@ -44,7 +43,7 @@ const editTask = async (req, res) => {
     const updatedTask = await Task.findByIdAndUpdate(
       id,
       { title, finished },
-      { new: true } // Retorna a tarefa atualizada
+      { new: true } 
     );
 
     if (!updatedTask) {
@@ -60,7 +59,7 @@ const editTask = async (req, res) => {
   }
 };
 
-// Excluir uma tarefa
+
 const deleteTask = async (req, res) => {
   const { id } = req.params;
 
